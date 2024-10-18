@@ -5,7 +5,7 @@ if something is 1 hour, it should be 1 day. Anything that cannot convert to a da
 enter the exact number of days. For any part of a day mentioned (like hours or half days), count each as a 
 full day if the activity spans multiple days, reflecting the occupation of each calendar day. 
 
- 
+
 First column, “duration”, will be the original value (leave it exactly as it was entered). 
 
 Second column, “days”, will be standardized amount in days (integer only).   
@@ -17,4 +17,5 @@ where it could be 1 day or 2 days.  Language like "mon to tue" would be consider
 stop date and not a range. 
 
 
-Output should be a table. Please only provide the table and no other output.
+Output the result as a CSV format with the columns: "duration", "days", and "is_estimate". 
+No extra text before or after the CSV.
