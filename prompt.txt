@@ -1,21 +1,40 @@
-You are tasked with converting the following durations to days. These durations are a free-form text 
-field on an 811 OneCall Ticket.  The Duration is how long the job should last. There may be misspellings 
-or errors. If you see an estimate or range, use the highest. The minimum number of days should be 1, 
-if something is 1 hour, it should be 1 day. Anything that cannot convert to a day, is error. For full days, 
-enter the exact number of days. For any part of a day mentioned (like hours or half days), count each as a 
-full day if the activity spans multiple days, reflecting the occupation of each calendar day. 
+You are tasked with converting the following durations to days. These durations are a free-form text field on an 811 
+OneCall Ticket. The Duration is how long the job should last. There may be misspellings or errors. If you see an 
+estimate or range, use the highest value. The minimum number of days if duration is known should be 1; if something is 
+1 hour, it should be 1 day. Anything that cannot convert to a day is an error (set "days" to 0). For full days, enter 
+the exact number of days. For any part of a day mentioned (like hours or half days), count each as a full day if the 
+activity spans multiple days, reflecting the occupation of each calendar day.  If the duration is not known, it should
+be 0 and an estimate.
 
+First column, "duration", will be the original value (leave it exactly as it was entered).
 
-First column, “duration”, will be the original value (leave it exactly as it was entered). 
+Second column, "days", will be the standardized amount in days (integer only).
 
-Second column, “days”, will be standardized amount in days (integer only).   
+Third column, "is_estimate", will be binary (1 for yes, 0 for no). This is used for anything that could be an estimate 
+based on ranges or if language that could suggest an estimate is present (e.g., "about 2 days", "1-2 days"). Language 
+like "mon to tue" would be considered a start and stop date and not a range.
 
-Third column, "is_estimate",  will be binary (1 for yes, 0 for no). This used for anything that could 
-be an estimate based on ranges or if language that could suggest an estimate is present. 
-Example of such language would be "about 2 days" . Example of a range would be "1-2 days" 
-where it could be 1 day or 2 days.  Language like "mon to tue" would be considered a start and 
-stop date and not a range. 
+Example Input:
+"1 day"
+"about 3 days"
+"2-4 weeks"
+"mon to tue"
 
+Example Output:
+"duration","days","is_estimate"
+"1 day",1,0
+"about 3 days",3,1
+"2-4 weeks",28,1
+"mon to tue",2,0
+"hamburger",0,1
+"march 25-march 27", 3, 0
 
-Output the result as a CSV format with the columns: "duration", "days", and "is_estimate". 
-No extra text before or after the CSV.
+Instructions:
+- Output the result as a CSV format with the columns: "duration", "days", and "is_estimate".
+- Do **not** include any markdown formatting, code blocks, or extra text before or after the CSV.
+- Ensure the CSV is properly formatted, with each value separated by commas, and strings enclosed in double quotes if necessary.
+
+{format_instructions}
+
+Data:
+{data}
